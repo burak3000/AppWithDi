@@ -10,7 +10,10 @@ namespace AppWithDi
 
         public JobLogger(string logFilePath)
         {
-            _logger = new LoggerConfiguration().WriteTo.File(logFilePath ?? "Job.log").CreateLogger();
+            _logger = new LoggerConfiguration()
+                .WriteTo
+                .File($"{logFilePath}_{DateTime.Now.ToString("yyyy-MM-ddTHH_mm_ss")}.log" ?? "Job.log")
+                .CreateLogger();
             _logger.Information("New job log is created successfully");
         }
 
